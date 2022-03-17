@@ -27,9 +27,9 @@
     <hr class="d-block" />
     <div>
       <h4>Create</h4>
-      <input type="text" placeholder="Name" />
-      <input type="text" placeholder="Age" />
-      <button>Create</button>
+      <input type="text" placeholder="Name" v-model="member.name" />
+      <input type="text" placeholder="Age" v-model="member.age" />
+      <button @click="membersCreate(member)">Create</button>
     </div>
   </div>
 </template>
@@ -38,10 +38,14 @@
 export default {
   computed: {
     member() {
-      return this.$store.state.$members.member;
+      return this.$store.state.$$members.member;
     },
   },
-  methods: {},
+  methods: {
+    membersCreate(member) {
+      this.$store.dispatch("membersCreate", member);
+    },
+  },
   created() {
     console.log(this.member);
     this.member.name = "";
