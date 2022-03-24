@@ -19,6 +19,10 @@ export const moduleMembers = {
             })
             console.log('Done membersCreate', thisStore.state.members)
         },
+        membersUpdate(thisStore, { index, member }) {
+            thisStore.state.members[index] = member
+            console.log('Done membersUpdate', thisStore.state.members)
+        },
         membersRead(thisStore) {
             const members = [{
                 name: '홍길동',
