@@ -15,7 +15,6 @@ export const moduleMembers = {
     },
     actions: {
         membersCreate(thisStore, member) {
-            debugger
             axios.post('http://localhost:8080/api/v1/members', member).then(function(response) {
                 console.log('Done membersCreate', response)
                 thisStore.dispatch('membersRead')
@@ -28,15 +27,12 @@ export const moduleMembers = {
             console.log('Done membersUpdate', thisStore.state.members)
         },
         membersRead(thisStore) {
-            const members = [{
-                name: '홍길동',
-                age: 20
-            }, {
-                name: '춘향이',
-                age: 16
-            }]
-            thisStore.commit('membersRead', members)
-            console.log('Done membersRead', thisStore.state.members)
+            axios.get('http://localhost:8080/api/v1/members').then(function(response) {
+                console.log('Done membersRead', response)
+                thisStore.commit('membersRead', response.data.members)
+            }).catch(function(error) {
+                thisStore.dispatch('axiosError', error)
+            })
         },
         membersDelete(thisStore, index) {
             thisStore.state.members.splice(index, 1)
