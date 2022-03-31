@@ -8,7 +8,11 @@ export default new Vuex.Store({
     state: {},
     getters: {},
     mutations: {},
-    actions: {},
+    actions: {
+        axiosError(thisStore, error) {
+            console.error(error.response || error.message || error)
+        }
+    },
     modules: {
         $$members: moduleMembers
     }
